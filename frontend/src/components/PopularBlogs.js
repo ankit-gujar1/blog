@@ -98,7 +98,7 @@ const PopularBlogs = () => {
                 </div>
               </div>
               <div className="card border border-0">
-                <Link to={'/post-blog'}>
+                <Link  to={'/view-blog/'+i._id}>
                   <div className="recent-square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
                     {/* 608x780 */}
                     <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + i.image} alt="Card image" />
@@ -123,7 +123,7 @@ const PopularBlogs = () => {
                   </div>
                 </div>
                 <div className="card-body p-0 ms-1 pt-2">
-                  <Link className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
+                  <Link  to={'/view-blog/'+i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
 
 
                   {/* <p>{i.body.split('\n').map((j) => (
