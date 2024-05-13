@@ -23,9 +23,10 @@ const loginUser=async(req,res)=>{
 
 const signupUser=async(req,res)=>{
     const {userName,password}=req.body;
+    const dp = req.file.path;
 
     try{
-        const u=await User.signup(userName,password);
+        const u=await User.signup(userName,password,dp);
         const token=createToken(u._id,u.role);
         //useAuthContext will provides data which we pass in this json (this json data is payload for dispatch fuction of useAuthContext)
         res.status(200).json({userName,token,role:u.role}); 

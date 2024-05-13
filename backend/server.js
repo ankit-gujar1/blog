@@ -14,6 +14,7 @@ const blogRouter=require('./routes/blogRoutes');
 app.use(cors());
 app.use(express.json());
 app.use('/images',express.static('images'));
+// app.use('/dp',express.static('images'));
 
 //change MONGO_URI and remaining .env stuff
 

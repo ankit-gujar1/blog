@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Navbar } from './Navbar'
 import { useAuthContext } from '../hooks/useAuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-
-const AddBlog = () => {
-
+const EditBlog = () => {
     const url = "http://localhost:8080/";
 
     const [title, setTitle] = useState();
@@ -16,6 +14,8 @@ const AddBlog = () => {
 
     const navigate = useNavigate();
 
+    const { id } = useParams();
+
     const { user } = useAuthContext();
 
     useEffect(() => {
@@ -23,9 +23,19 @@ const AddBlog = () => {
             navigate('/login');
             return;
         }
+
+        axios.get(url + 'get-blog/' + id, { headers: { Authorization: 'Bearer ' + user.token } })
+            .then((r) => {
+                setTitle(r.data.title);
+                setBody(r.data.body);
+                setImage(r.data.image);
+            })
+            .catch((e) => {
+                console.log(e);
+            })
     }, [user])
 
-    const postBlog = (e) => {
+    const editBlog = (e) => {
         e.preventDefault();
 
         const formData = new FormData();
@@ -33,10 +43,10 @@ const AddBlog = () => {
         formData.append('body', body);
         formData.append('image', image);
 
-        axios.post(url + 'post-blog', formData, { headers: { Authorization: 'Bearer ' + user.token } })
+        axios.patch(url + 'edit-blog/' + id, formData, { headers: { Authorization: 'Bearer ' + user.token } })
             .then((r) => {
                 console.log(r.data);
-                navigate('/');
+                navigate('/my-blogs');
             })
             .catch((e) => {
                 console.log(e);
@@ -59,56 +69,47 @@ const AddBlog = () => {
             <div className="row justify-content-center my-3 mx-2">
                 <div className="col-md-6">
                     {/* <h3 className="text-center my-3" style={{fontFamily:'Poetsen One'}}>Share your story</h3> */}
-                    <form onSubmit={postBlog} encType=" multipart/form-data">
+                    <form onSubmit={editBlog} encType=" multipart/form-data">
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control border border-3" onChange={(e) => setTitle(e.target.value)} placeholder="name@example.com" />
+                            <input type="text" className="form-control border border-3" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="name@example.com" />
                             <label className='text-dark' for="floatingInput">Blog Title</label>
                         </div>
 
 
                         <div className="form-floating">
-                            <textarea className="form-control border border-3" onChange={(e) => setBody(e.target.value)} placeholder="Leave a comment here" style={{ height: "250px" }}></textarea>
+                            <textarea className="form-control border border-3" value={body} onChange={(e) => setBody(e.target.value)} placeholder="Leave a comment here" style={{ height: "250px" }}></textarea>
                             <label className='text-dark' for="floatingTextarea">Blog Description</label>
                         </div>
 
-
-                        {selectedImage &&
-                            <div className="row flex-lg-row-reverse">
-
-                                <div className="col-lg-6 col-12 card border border-0 mt-2">
-                                    <div className="recent-square-container m-auto mb-3 bg-dark border border-0 shadow-lg mb-3">
-                                        {/* 608x780 */}
-                                        <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={URL.createObjectURL(selectedImage)} alt="Card image" />
-                                    </div>
+                        <div className="row flex-lg-row-reverse">
+                          
+                            {selectedImage && <div className="col-lg-6 col-12 card border border-0 mt-2">
+                                <div className="recent-square-container m-auto mb-3 bg-dark border border-0 shadow-lg mb-3">
+                                    {/* 608x780 */}
+                                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={URL.createObjectURL(selectedImage)} alt="Card image" />
                                 </div>
-
-                                <div className='col-lg-6 col-12 m-auto'>
-                                    <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
-                                    <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => { setImage(e.target.files[0]); setselectedImage(e.target.files[0]) }} id="formFile" accept='image/*' />
-                                </div>
-
                             </div>}
 
-                        {!selectedImage && <div className='m-auto mt-2'>
-                            <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
-                            <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => { setImage(e.target.files[0]); setselectedImage(e.target.files[0]) }} id="formFile" accept='image/*' />
-                        </div>}
+                            {!selectedImage && image && <div className="col-lg-6 col-12 card border border-0 mt-2">
+                                <div className="recent-square-container m-auto mb-3 bg-dark border border-0 shadow-lg mb-3">
+                                    {/* 608x780 */}
+                                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + image} alt="Card image" />
+                                </div>
+                            </div>}
 
+                            <div className='col-lg-6 col-12 m-auto'>
+                                <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
+                                <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => {setImage(e.target.files[0]);setselectedImage(e.target.files[0])}} id="formFile" accept='image/*' />
+                            </div>
+                        </div>
 
-                {/* </div> */}
-
-                {/* <div className="mt-2">
-                            <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
-                            <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => setImage(e.target.files[0])} id="formFile" accept='image/*' />
-                        </div> */}
-
-                <div className="text-center mt-3">
-                    <button type="submit" className='btn btn-dark rounded-pill fs-5 px-5 py-1'>Post</button>
+                        <div className="text-center mt-3">
+                            <button type="submit" className='btn btn-dark rounded-pill fs-5 px-5 py-1'>Save</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-            </div >
-    <style>{`
+            </div>
+            <style>{`
             .grid {
                 max-width: 100%;
                 margin: 0 auto;
@@ -183,8 +184,8 @@ const AddBlog = () => {
                 border-radius: 20px;
               }
             `}</style>
-        </div >
+        </div>
     )
 }
 
-export default AddBlog
+export default EditBlog

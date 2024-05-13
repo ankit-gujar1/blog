@@ -8,6 +8,9 @@ import Login from './components/Login';
 import { AddTest } from './components/AddTest';
 import Home from './components/admin/Home';
 import AddBlog from './components/AddBlog';
+import MyBlogs from './components/MyBlogs';
+import PopularBlogs from './components/PopularBlogs';
+import EditBlog from './components/EditBlog';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -17,6 +20,9 @@ const router=createBrowserRouter([
   {path:'/login',element:<Login/>},
   {path:'/add',element:<AddTest/>},
   {path:'/post-blog',element:<AddBlog/>},
+  {path:'/my-blogs',element:<MyBlogs/>},
+  {path:'/popular-blogs',element:<PopularBlogs/>},
+  {path:'/edit-blog/:id',element:<EditBlog/>},
 
   //admin
   {path:'/admin/home',element:<Home/>}

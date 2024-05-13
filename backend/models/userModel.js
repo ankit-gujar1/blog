@@ -1,35 +1,39 @@
-const mongoose=require('mongoose');
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const validator = require('validator');
 
-const userSchema=mongoose.Schema({
-    userName:{
-        required:true,
-        type:String,
-        unique:true
+const userSchema = mongoose.Schema({
+    userName: {
+        required: true,
+        type: String,
+        unique: true
     },
-    password:{
-        required:true,
-        type:String
+    password: {
+        required: true,
+        type: String
     },
-    role:{
-        type:String,
-        default:"user",
-        required:false
+    dp: {
+        type: String, // Just store the path to the uploaded file
+        required: true
+    },
+    role: {
+        type: String,
+        default: "user",
+        required: false
     }
-},{timestamps:true})
+}, { timestamps: true })
 
 
 //sign up and login are like opposite if user is found during sign up then throw error but if user is found during login then don't throw error
 // in both cases(login and sign up) we throw errors first then apply actual logics respectively
 
-userSchema.statics.signup=async function(userName,password){
-    if(!userName || !password) throw Error("Enter username and password");
-    if(!validator.isStrongPassword(password)) throw Error("Password must contain that shit");
+userSchema.statics.signup = async function (userName, password, dp) {
+    if (!userName || !password || !dp) throw Error("Enter username and password");
+    if (!validator.isStrongPassword(password)) throw Error("Password must contain that shit");
 
-    const uName=userName.toLowerCase();
+    const uName = userName.toLowerCase();
 
-    const u=await this.findOne({uName});
+    const u = await this.findOne({ uName });
 
     // if(u) throw Error("Username already exist");
 
@@ -40,33 +44,33 @@ userSchema.statics.signup=async function(userName,password){
 
     // return user;
 
-    if(!u){
-        const salt=await bcrypt.genSalt(10);
-        const hash=await bcrypt.hash(password,salt);
+    if (!u) {
+        const salt = await bcrypt.genSalt(10);
+        const hash = await bcrypt.hash(password, salt);
 
-        const user= await this.create({userName:uName,password:hash});
+        const user = await this.create({ userName: uName, password: hash, dp});
 
         return user;
     }
     else throw Error("Username already exist");
 }
 
-userSchema.statics.login=async function(userName,password){
-    if(!userName || !password) throw Error("Enter username and password");
+userSchema.statics.login = async function (userName, password) {
+    if (!userName || !password) throw Error("Enter username and password");
 
-    const uName=userName.toLowerCase();
+    const uName = userName.toLowerCase();
 
-    const u=await this.findOne({userName:uName});
+    const u = await this.findOne({ userName: uName });
 
     // if(!u) throw Error("User not exist or inccorect username");
 
     // const match=await bcrypt.compare(password,u.password);
 
     // if(!match) throw Error("Incorrect password");
-    
+
     // return u;
 
-    if(u){
+    if (u) {
         const match = await bcrypt.compare(password, u.password);
 
         if (!match) throw Error("Incorrect password");
@@ -76,4 +80,4 @@ userSchema.statics.login=async function(userName,password){
     else throw Error("User not exist or inccorect username");
 }
 
-module.exports=mongoose.model('User',userSchema);
+module.exports = mongoose.model('User', userSchema);

@@ -14,17 +14,29 @@ export const Navbar = () => {
     }
 
     return (
-        <div>
+        <div className="mt-3">
             <nav className="navbar navbar-expand-lg bg-body-tertiary">
                 <div className="container-fluid">
-                    <Link className="navbar-brand" to={'/'}>Navbar</Link>
+                    <Link className="navbar-brand fs-2" to={'/'} style={{fontFamily:'Poetsen One'}}>SparkWaves</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <Link className="nav-link active" aria-current="page" to={'/'}>Home</Link>
+                                <Link className="nav-link active fs-6" aria-current="page" to={'/'}>Home</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active fs-6" aria-current="page" to={'/post-blog'}>Post Blog</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active fs-6" aria-current="page" to={'/my-blogs'}>My Blogs</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active fs-6" aria-current="page" to={'/popular-blogs'}>Popular Blogs</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link className="nav-link active fs-6" aria-current="page" to={'/'}>Recent Blogs</Link>
                             </li>
                         </ul>
 
@@ -33,10 +45,10 @@ export const Navbar = () => {
                                 {!user && (
                                     <>
                                         <li className="nav-item">
-                                            <Link className="nav-link active" aria-current="page" to={'/login'}>Login</Link>
+                                            <Link className="btn btn-outline-dark me-2 rounded-pill px-4" aria-current="page" to={'/login'}>Login</Link>
                                         </li>
                                         <li className="nav-item">
-                                            <Link className="nav-link active" aria-current="page" to={'/signup'}>Signup</Link>
+                                            <Link className="btn btn-dark rounded-pill px-4" aria-current="page" to={'/signup'}>Signup</Link>
                                         </li>
                                     </>
                                 )}
@@ -44,10 +56,7 @@ export const Navbar = () => {
                                 {user && (
                                     <>
                                         <li className="nav-item">
-                                            <Link className="nav-link active" aria-current="page">welcome {user.userName}</Link>
-                                        </li>
-                                        <li className="nav-item">
-                                            <button className="btn btn-danger" onClick={logoutUser}>Logout</button>
+                                            <button className="btn btn-dark ms-2 rounded-pill px-4" onClick={logoutUser}>Logout</button>
                                         </li>
                                     </>
                                 )}

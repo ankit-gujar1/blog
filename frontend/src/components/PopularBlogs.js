@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Navbar } from "./components/Navbar";
-import { useAuthContext } from "./hooks/useAuthContext";
 import axios from "axios";
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
+import { useAuthContext } from "../hooks/useAuthContext";
+import { Navbar } from "./Navbar";
 
-function App() {
-  // const url="https://reminder-3jth.onrender.com/";
+const PopularBlogs = () => {
+
+
   const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 
   const [popularBlogs, setpopularBlogs] = useState();
-  const [blogs, setBlogs] = useState();
   // const [display, setDisplay] = useState('block');
 
   const [likes, setLikes] = useState(0);
   const [disableLikeBtn, setDisableLikeBtn] = useState(false);
 
-
   const { user } = useAuthContext();
 
-  // console.log(x)
   useEffect(() => {
     // const u=JSON.parse(localStorage.getItem('user'));
     // console.log("hii from App.js");
@@ -36,27 +34,9 @@ function App() {
       return;
     }
 
-    axios.get(url + "8-popular-blogs", { headers: { Authorization: "Bearer " + user.token } })
+    axios.get(url + "popular-blogs", { headers: { Authorization: "Bearer " + user.token } })
       .then((r) => {
         setpopularBlogs(r.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-
-    // axios.get(url + "8-blogs", { headers: { Authorization: "Bearer " + user.token } })
-    //   .then((r) => {
-    //     setBlogs(r.data);
-    //     setDisplay('block');
-    //   })
-    //   .catch((e) => {
-    //     console.log(e);
-    //   });
-
-    axios.get(url + "all-blogs", { headers: { Authorization: "Bearer " + user.token } })
-      .then((r) => {
-        setBlogs(r.data);
-        // setDisplay('block');
       })
       .catch((e) => {
         console.log(e);
@@ -76,131 +56,26 @@ function App() {
       })
   }
 
-  // function getAll() {
-  //   axios.get(url + "all-blogs", { headers: { Authorization: "Bearer " + user.token } })
-  //     .then((r) => {
-  //       setBlogs(r.data);
-  //       setDisplay('none');
-  //     })
-  //     .catch((e) => {
-  //       console.log(e);
-  //     });
+  // function getAllPopularBlogs() {
+  //     axios.get(url + "popular-blogs", { headers: { Authorization: "Bearer " + user.token } })
+  //         .then((r) => {
+  //             setpopularBlogs(r.data);
+  //             setDisplay('none');
+  //         })
+  //         .catch((e) => {
+  //             console.log(e);
+  //         });
 
 
   // }
 
   return (
     <div className="mt-0 pt-0">
+      {/* <div className="o-container"> */}
       <div className="grid o-container row">
         <Navbar />
         <hr className="sketch-rule grid__item text-dark mt-4" />
-        {/* <div className="col-6"><h1 className="mb-4 ps-2">Popular Stuff</h1></div>
-        <div className="col-6 d-flex justify-content-end h-25">
-        <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link> */}
-
-        {/* </div> */}
-      </div>
-      <div className="o-container">
-        {/* {likes} updating in real time */}
-        <div className="row ">
-          <div className="col-lg-6 col-sm-12">
-            <p className="mt-3 display-6 mb-0">
-              Share what you feel, what you like, what you do!!
-            </p>
-            <p className="fs-3 mt-0 fw-lighter">
-              {/* {" "} */}
-              Watch others thoughts, stories and ideas.
-            </p>
-          </div>
-          <div className="col-lg-6 col-sm-12 ms-auto custom-mobile-style">
-            <div className="search mx-2">
-              <input
-                className="px-4 py-3 rounded-pill"
-                placeholder="Enter email"
-                type="text"
-              />
-              <button className="btn btn-dark rounded-pill py-3" type="submit">
-                Subscribe Now
-              </button>
-              <p className="mt-2 m-auto ms-3">
-                {/* {" "} */}
-                Get new blogs delivered straight to your inbox every week.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="grid o-container row">
-        <hr className="sketch-rule grid__item text-dark mt-4" />
-        <div className="col-6"><h1 className="mb-4 ps-2" style={{ fontFamily: 'Poetsen One' }}>Popular Stuff</h1></div>
-        <div className="col-6 d-flex justify-content-end h-25">
-          <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link>
-
-        </div>
-      </div>
-
-
-      {/* <div> */}
-      <div className="row m-0 flex-nowrap overflow-auto o-container">
-        {popularBlogs &&
-          popularBlogs.map((i) => (
-
-            <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-9">
-              <div id="btn-message" className="button-message">
-                <div className="content-avatar">
-                  <div className="avatar">
-                    <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={"http://localhost:8080/" + i.postedBy.dp}></img></Link>
-                  </div>
-                </div>
-                <div className="notice-content">
-                  <div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div>
-                </div>
-              </div>
-              <div className="card border border-0">
-                <Link to={'/post-blog'}>
-                  <div className="square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
-                    {/* 608x780 */}
-                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + i.image} alt="Card image" />
-                  </div>
-                </Link>
-
-                <div className="row">
-                  <div className="col-6">
-                    <button className="Btn ms-1 p-0 m-0" onClick={() => handleLike(i._id)} disabled={disableLikeBtn}>
-                      <span className="leftContainer rounded">
-                        <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="#fff"><path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path></svg>
-                      </span>
-                      <span className="likeCount rounded">
-                        {i.likes}
-                      </span>
-                    </button>
-                  </div>
-                  <div className="col-6 m-auto d-flex justify-content-end pe-3">
-                    <span className="" style={{ fontSize: "15px" }}>
-                      {formatDistanceToNow(new Date(i.createdAt)).replace('about', '')}<span> ago</span>
-                    </span>
-                  </div>
-                </div>
-                <div className="card-body p-0 ms-1 pt-2">
-                  <Link className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
-
-
-                  {/* <p>{i.body.split('\n').map((j) => (
-                      <p>{j}</p>
-                    ))}</p> */}
-
-
-                </div>
-              </div>
-
-            </div>
-          ))}
-      </div>
-
-      <div className="grid o-container row">
-        <hr className="sketch-rule grid__item text-dark mt-5" />
-        <div className="col-6"><h1 className="mb-4 ps-2" style={{ fontFamily: 'Poetsen One' }}>Recent Stuff</h1></div>
+        <div className="col-6"><h1 className="mb-4 ps-2" style={{ fontFamily: 'Poetsen One' }}>Our most popular blogs</h1></div>
         <div className="col-6 d-flex justify-content-end h-25">
           <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link>
 
@@ -208,8 +83,8 @@ function App() {
       </div>
 
       <div className="row m-0 o-container">
-        {blogs &&
-          blogs.map((i) => (
+        {popularBlogs &&
+          popularBlogs.map((i) => (
 
             <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-11 mb-3 m-auto">
               <div id="btn-message" className="button-message">
@@ -263,42 +138,33 @@ function App() {
           ))}
 
         {/* <div className="text-center" style={{ display: display }}>
-          <button className="btn btn-dark btn-lg rounded-pill px-4" onClick={getAll} >View More</button>
-        </div> */}
-      </div>
-
-      <div className="grid o-container row">
-        <hr className="sketch-rule grid__item text-dark mt-4" />
-        <div className="col-6"><h1 className="mb-4 ps-2">Recent Stuff</h1></div>
-        <div className="col-6 d-flex justify-content-end h-25">
-          <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link>
-
-        </div>
+                        <button className="btn btn-dark btn-lg rounded-pill px-4" onClick={getAllPopularBlogs} >View More</button>
+                    </div> */}
       </div>
 
       {/* </div> */}
       <style>{`
 
 .button {
-  padding: 15px 20px;
-  border: none;
-  outline: none;
-  background-color: #151515;
-  color: #eee;
-  border-radius: 7px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease-out;
-}
-
-.button:hover {
-  transform: translateY(-3px);
-}
-
-.button-span {
-  color: #aaa;
-}
-
+    padding: 15px 20px;
+    border: none;
+    outline: none;
+    background-color: #151515;
+    color: #eee;
+    border-radius: 7px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+  }
+  
+  .button:hover {
+    transform: translateY(-3px);
+  }
+  
+  .button-span {
+    color: #aaa;
+  }
+  
 
 .grid {
   max-width: 100%;
@@ -330,6 +196,7 @@ hr {
   background: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none' viewBox='0 0 119 6'%3E%3Cpath d='M119 3.8c-60 2.5-33.5-7-119 0' fill='none' stroke='%231d2d35' stroke-width='2'/%3E%3C/svg%3E")
     center/5em 100% repeat-x;
 }
+
 
       .search {
         display: inline-block;
@@ -405,16 +272,7 @@ hr {
   .square-container img {
     border-radius: 20px;
   }
-
-  .custom-mobile-style{
-    margin-top: 1.3rem !important;
-  }
 }
-
-.custom-mobile-style{
-  margin-top: 3rem;
-}
-
 
 .recent-square-container {
     width: 100%; /* adjust as needed */
@@ -441,6 +299,8 @@ hr {
   .square-container img {
     border-radius: 20px;
   }
+
+
 
 
   .Btn {
@@ -506,6 +366,7 @@ hr {
     transform: scale(1.15);
     transform-origin: top;
   }
+  
   
   
 
@@ -651,7 +512,7 @@ hr {
       
       `}</style>
     </div>
-  );
+  )
 }
 
-export default App;
+export default PopularBlogs

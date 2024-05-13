@@ -14,12 +14,46 @@ const getAllBlogs = async (req, res) => {
     }
 }
 
-const getPopularBlogs = async (req, res) => {
+const getBlogByBlogId = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ error: "Blog not found" });
+    const b = await Blog.findById(id);
+    if (!b) return res.status(404).json({ error: "Blog not found" });
+    res.status(200).json(b);
+}
+
+const get8Blogs = async (req, res) => {
+    try {
+        const b = await Blog.find({}).populate({
+            path: 'postedBy',
+            select: '-password'
+        }).sort({ createdAt: -1 }).limit(8);
+        res.status(200).json(b);
+    }
+    catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+}
+
+const get8PopularBlogs = async (req, res) => {
     try {
         const b = await Blog.find({}).populate({
             path: 'postedBy',
             select: '-password'
         }).sort({ likes: -1 }).limit(10);
+        res.status(200).json(b);
+    }
+    catch (e) {
+        res.status(400).json({ error: e.message });
+    }
+}
+
+const getAllPopularBlogs = async (req, res) => {
+    try {
+        const b = await Blog.find({}).populate({
+            path: 'postedBy',
+            select: '-password'
+        }).sort({ likes: -1 });
         res.status(200).json(b);
     }
     catch (e) {
@@ -65,9 +99,14 @@ const deleteBlog = async (req, res) => {
 const updateBlog = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ error: "Blog not found" });
-    const b = await Blog.findOneAndUpdate({ _id: id }, {
-        ...req.body
-    })
+    let updateFields = { ...req.body };
+    
+    if (req.file) {
+        const updateimage = req.file.path;
+        updateFields.image = updateimage;
+    }
+
+    const b = await Blog.findOneAndUpdate({ _id: id }, updateFields)
     if (!b) return res.status(404).json({ error: "Blog not found" });
     res.status(200).json(b);
 }
@@ -92,4 +131,4 @@ const dislikeBlog = async (req, res) => {
     }
 }
 
-module.exports = { getAllBlogs, getAllBlogsByUserId, getPopularBlogs, postBlog, deleteBlog, updateBlog, likeBlog, dislikeBlog };
+module.exports = { getAllBlogs, getAllBlogsByUserId, get8PopularBlogs, getAllPopularBlogs, postBlog, deleteBlog, updateBlog, likeBlog, dislikeBlog, get8Blogs, getBlogByBlogId };
