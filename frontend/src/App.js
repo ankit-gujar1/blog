@@ -151,7 +151,7 @@ function App() {
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
-                    <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={"http://localhost:8080/" + i.postedBy.dp}></img></Link>
+                    <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img></Link>
                   </div>
                 </div>
                 <div className="notice-content">
@@ -162,7 +162,7 @@ function App() {
                 <Link to={'/view-blog/' + i._id}>
                   <div className="square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
                     {/* 608x780 */}
-                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + i.image} alt="Card image" />
+                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={url + i.image} alt="Card image" />
                   </div>
                 </Link>
 
@@ -216,7 +216,7 @@ function App() {
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
-                    <img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={"http://localhost:8080/" + i.postedBy.dp}></img>
+                    <img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img>
                   </div>
                 </div>
                 <div className="notice-content">
@@ -227,7 +227,7 @@ function App() {
                 <Link to={'/post-blog'}>
                   <div className="recent-square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
                     {/* 608x780 */}
-                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + i.image} alt="Card image" />
+                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={url + i.image} alt="Card image" />
                   </div>
                 </Link>
 

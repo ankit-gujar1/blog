@@ -14,9 +14,9 @@ export const Navbar = () => {
     }
 
     return (
-        <div className="mt-3">
-            <nav className="navbar navbar-expand-lg bg-body-tertiary">
-                <div className="container-fluid">
+        <div className="mt-3" style={{backgroundColor:'white'}}>
+            <nav className="navbar navbar-expand-lg bg-body-tertiary" style={{backgroundColor:'white'}}>
+                <div className="container-fluid" style={{backgroundColor:'white'}}>
                     <Link className="navbar-brand fs-2" to={'/'} style={{fontFamily:'Poetsen One'}}>SparkWaves</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -62,6 +62,12 @@ export const Navbar = () => {
                     </div>
                 </div>
             </nav>
+            <style>{`
+            .bg-body-tertiary {
+                --bs-bg-opacity: 1;
+                background-color: white !important;
+              }
+            `}</style>
         </div>
     )
 }

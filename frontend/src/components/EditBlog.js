@@ -96,7 +96,7 @@ const EditBlog = () => {
                             {!selectedImage && image && <div className="col-lg-6 col-12 card border border-0 mt-3">
                                 <div className="recent-square-container m-auto mb-3 bg-dark border border-0 shadow-lg mb-3">
                                     {/* 608x780 */}
-                                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + image} alt="Card image" />
+                                    <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={url + image} alt="Card image" />
                                 </div>
                             </div>}
 

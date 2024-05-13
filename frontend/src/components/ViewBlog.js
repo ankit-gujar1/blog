@@ -64,7 +64,7 @@ const ViewBlog = () => {
 
           <div className="col-12 recent-square-container bg-dark border border-0 shadow-lg m-auto">
             {/* 608x780 */}
-            <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + blog.image} alt="Card image" />
+            <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={url + blog.image} alt="Card image" />
           </div>
 
           <p className="mt-4 mb-0 pb-0 text-justify">{blog.body.split('\n').map((j) => (
@@ -86,7 +86,7 @@ const ViewBlog = () => {
             <div id="btn-message" className="button-message">
               <div className="content-avatar">
                 <div className="avatar">
-                  <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={"http://localhost:8080/" + blog.postedBy.dp}></img></Link>
+                  <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + blog.postedBy.dp}></img></Link>
                 </div>
               </div>
               <div className="notice-content">
