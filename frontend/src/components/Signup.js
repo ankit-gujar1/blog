@@ -62,13 +62,13 @@ const Signup = () => {
                     <form onSubmit={signupUser} encType=" multipart/form-data">
                         <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Username</label> */}
-                            <input type="text" className="form-control shadow bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
+                            <input type="text" className="form-control border border-3 shadow bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
                             <label className='text-dark' for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Password</label> */}
-                            <input type="password" className="form-control shadow bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
+                            <input type="password" className="form-control border border-3 shadow bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
                             <label className='text-dark' for="floatingInput">Password</label>
                         </div>
 
@@ -97,6 +97,35 @@ const Signup = () => {
             </div> */}
 
             <style>{`
+
+/* Styling for file input */
+input[type="file"]::-webkit-file-upload-button {
+    cursor: pointer;
+    background-color: white !important; /* Change button color to white */
+    color: black; /* Change text color to black */
+    // border: 1px solid black; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    padding: 8px 16px; /* Add padding */
+    font-size: 14px; /* Adjust font size */
+    outline: none !important;/* Remove default focus outline */
+}
+
+input[type="file"]::-webkit-file-upload-button:hover {
+    cursor: pointer;
+    background-color: white !important; /* Change button color to white */
+    color: black; /* Change text color to black */
+    // border: 1px solid black; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    padding: 8px 16px; /* Add padding */
+    font-size: 14px; /* Adjust font size */
+    outline: none !important;/* Remove default focus outline */
+}
+
+input[type="text"]:focus {
+    outline: none !important; /* Remove default focus outline */
+}
+
+
             .grid {
                 max-width: 100%;
                 margin: 0 auto;

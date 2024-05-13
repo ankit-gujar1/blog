@@ -56,13 +56,13 @@ const Login = () => {
                     <form onSubmit={loginUser}>
                         <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Username</label> */}
-                            <input type="text" className="form-control shadow bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
+                            <input type="text" className="form-control border border-3 shadow bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
                             <label className='text-dark' for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Password</label> */}
-                            <input type="password" className="form-control shadow bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
+                            <input type="password" className="form-control border border-3 shadow bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
                             <label className='text-dark' for="floatingInput">Password</label>
                         </div>
 
@@ -86,6 +86,12 @@ const Login = () => {
             </div> */}
 
             <style>{`
+
+.form-control:focus {
+    outline: none !important; /* Remove default blue outline */
+  }
+
+
             .grid {
                 max-width: 100%;
                 margin: 0 auto;

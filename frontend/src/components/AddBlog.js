@@ -190,6 +190,17 @@ const AddBlog = () => {
               .recent-square-container img {
                 border-radius: 20px;
               }
+
+              input[type="file"]::-webkit-file-upload-button {
+                cursor: pointer;
+                background-color: white !important; /* Change button color to white */
+                color: black; /* Change text color to black */
+                // border: 1px solid black; /* Add border */
+                border-radius: 4px; /* Add border radius */
+                padding: 8px 16px; /* Add padding */
+                font-size: 14px; /* Adjust font size */
+                outline: none !important;/* Remove default focus outline */
+            }
             `}</style>
     </div >
   )
