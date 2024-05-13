@@ -4,10 +4,11 @@ import { Navbar } from "./components/Navbar";
 import { useAuthContext } from "./hooks/useAuthContext";
 import axios from "axios";
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
+import Footer from "./components/Footer";
 
 function App() {
-  // const url="https://reminder-3jth.onrender.com/";
-  const url = "http://localhost:8080/";
+  const url = "https://blog-fotd.onrender.com/";
+  // const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 
@@ -158,7 +159,7 @@ function App() {
                 </div>
               </div>
               <div className="card border border-0">
-                <Link to={'/view-blog/'+i._id}>
+                <Link to={'/view-blog/' + i._id}>
                   <div className="square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
                     {/* 608x780 */}
                     <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + i.image} alt="Card image" />
@@ -183,7 +184,7 @@ function App() {
                   </div>
                 </div>
                 <div className="card-body p-0 ms-1 pt-2">
-                  <Link  to={'/view-blog/'+i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
+                  <Link to={'/view-blog/' + i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
 
 
                   {/* <p>{i.body.split('\n').map((j) => (
@@ -248,7 +249,7 @@ function App() {
                   </div>
                 </div>
                 <div className="card-body p-0 ms-1 pt-2">
-                  <Link  to={'/view-blog/'+i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
+                  <Link to={'/view-blog/' + i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
 
 
                   {/* <p>{i.body.split('\n').map((j) => (
@@ -267,15 +268,10 @@ function App() {
         </div> */}
       </div>
 
-      <div className="grid o-container row">
+        <Footer />
+      {/* <div className="grid o-container row">
         <hr className="sketch-rule grid__item text-dark mt-4" />
-        <div className="col-6"><h1 className="mb-4 ps-2">Recent Stuff</h1></div>
-        <div className="col-6 d-flex justify-content-end h-25">
-          <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link>
-
-        </div>
-      </div>
-
+      </div> */}
       {/* </div> */}
       <style>{`
 

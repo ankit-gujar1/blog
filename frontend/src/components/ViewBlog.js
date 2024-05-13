@@ -4,98 +4,107 @@ import axios from "axios";
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Navbar } from "./Navbar";
+import Footer from "./Footer";
 
 const ViewBlog = () => {
-    const url = "http://localhost:8080/";
 
-    const navigate = useNavigate();
+  const url = "https://blog-fotd.onrender.com/";
+  // const url = "http://localhost:8080/";
 
-    const [blog, setBlog] = useState();
-    const [likes, setLikes] = useState(0);
-    const [disableLikeBtn, setDisableLikeBtn] = useState(false);
+  const navigate = useNavigate();
 
-    const { user } = useAuthContext();
+  const [blog, setBlog] = useState();
+  const [likes, setLikes] = useState(0);
+  const [disableLikeBtn, setDisableLikeBtn] = useState(false);
 
-    const { id } = useParams();
+  const { user } = useAuthContext();
 
-    useEffect(() => {
-        if (!user) {
-            navigate('/login');
-            return;
-        }
+  const { id } = useParams();
 
-        axios.get(url + 'get-blog/' + id, { headers: { Authorization: 'Bearer ' + user.token } })
-            .then((r) => {
-                setBlog(r.data);
-            })
-            .catch((e) => {
-                console.log(e);
-            })
-    }, [user, likes])
-
-    function handleLike(id) {
-        axios.put(url + "like-blog/" + id, {}, { headers: { Authorization: "Bearer " + user.token } })
-            .then(() => {
-                // console.log("liked");
-                setLikes(likes + 1);
-                setDisableLikeBtn(false);
-                // console.log(likes);
-            })
-            .catch((e) => {
-                console.log(e);
-            })
+  useEffect(() => {
+    if (!user) {
+      navigate('/login');
+      return;
     }
 
-    return (
-        <div className="mt-0 pt-0">
-            {blog &&
-                <div className="grid o-container row">
-                    <Navbar />
-                    <hr className="sketch-rule grid__item text-dark mt-4" />
-                    <div className="col-12">
-                        <h1 className="mb-4 text-center" style={{ fontFamily: 'Poetsen One' }}>{blog.title}</h1></div>
-                    {/* <div className="col-6 d-flex justify-content-end h-25">
+    axios.get(url + 'get-blog/' + id, { headers: { Authorization: 'Bearer ' + user.token } })
+      .then((r) => {
+        setBlog(r.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+  }, [user, likes])
+
+  function handleLike(id) {
+    axios.put(url + "like-blog/" + id, {}, { headers: { Authorization: "Bearer " + user.token } })
+      .then(() => {
+        // console.log("liked");
+        setLikes(likes + 1);
+        setDisableLikeBtn(false);
+        // console.log(likes);
+      })
+      .catch((e) => {
+        console.log(e);
+      })
+  }
+
+  return (
+    <div className="mt-0 pt-0">
+      {blog &&
+        <div className="grid o-container row">
+          <Navbar />
+          <hr className="sketch-rule grid__item text-dark mt-4" />
+          <div className="col-12">
+            <h1 className="mb-4 text-center" style={{ fontFamily: 'Poetsen One' }}>{blog.title}</h1></div>
+          {/* <div className="col-6 d-flex justify-content-end h-25">
         <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link> */}
 
-                    {/* </div> */}
+          {/* </div> */}
 
-                    <div className="col-12 recent-square-container bg-dark border border-0 shadow-lg m-auto">
-                        {/* 608x780 */}
-                        <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + blog.image} alt="Card image" />
-                    </div>
+          <div className="col-12 recent-square-container bg-dark border border-0 shadow-lg m-auto">
+            {/* 608x780 */}
+            <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + blog.image} alt="Card image" />
+          </div>
 
-                    <p className="mt-4 mb-0 pb-0 text-justify">{blog.body.split('\n').map((j) => (
-                        <p>{j}</p>
-                    ))}</p>
+          <p className="mt-4 mb-0 pb-0 text-justify">{blog.body.split('\n').map((j) => (
+            <p>{j}</p>
+          ))}</p>
 
-                    <div className="col-6 m-auto d-flex justify-content-end">
-                        <button className="Btn ms-1 p-0 m-0" onClick={() => handleLike(blog._id)} disabled={disableLikeBtn}>
-                            <span className="leftContainer rounded">
-                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="#fff"><path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path></svg>
-                            </span>
-                            <span className="likeCount rounded">
-                                {blog.likes}
-                            </span>
-                        </button>
-                    </div>
+          <div className="col-6 m-auto d-flex justify-content-end">
+            <button className="Btn ms-1 p-0 m-0" onClick={() => handleLike(blog._id)} disabled={disableLikeBtn}>
+              <span className="leftContainer rounded">
+                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512" fill="#fff"><path d="M313.4 32.9c26 5.2 42.9 30.5 37.7 56.5l-2.3 11.4c-5.3 26.7-15.1 52.1-28.8 75.2H464c26.5 0 48 21.5 48 48c0 18.5-10.5 34.6-25.9 42.6C497 275.4 504 288.9 504 304c0 23.4-16.8 42.9-38.9 47.1c4.4 7.3 6.9 15.8 6.9 24.9c0 21.3-13.9 39.4-33.1 45.6c.7 3.3 1.1 6.8 1.1 10.4c0 26.5-21.5 48-48 48H294.5c-19 0-37.5-5.6-53.3-16.1l-38.5-25.7C176 420.4 160 390.4 160 358.3V320 272 247.1c0-29.2 13.3-56.7 36-75l7.4-5.9c26.5-21.2 44.6-51 51.2-84.2l2.3-11.4c5.2-26 30.5-42.9 56.5-37.7zM32 192H96c17.7 0 32 14.3 32 32V448c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32V224c0-17.7 14.3-32 32-32z"></path></svg>
+              </span>
+              <span className="likeCount rounded">
+                {blog.likes}
+              </span>
+            </button>
+          </div>
 
-                    <div className="col-6 m-auto">
-                    <div id="btn-message" className="button-message">
-                <div className="content-avatar">
-                  <div className="avatar">
-                    <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={"http://localhost:8080/" + blog.postedBy.dp}></img></Link>
-                  </div>
-                </div>
-                <div className="notice-content">
-                  <div className="user-id fs-6 m-auto">@{blog.postedBy.userName}</div>
+          <div className="col-6 m-auto">
+            <div id="btn-message" className="button-message">
+              <div className="content-avatar">
+                <div className="avatar">
+                  <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={"http://localhost:8080/" + blog.postedBy.dp}></img></Link>
                 </div>
               </div>
+              <div className="notice-content">
+                <div className="user-id fs-6 m-auto">@{blog.postedBy.userName}</div>
+              </div>
+            </div>
 
-                </div>
-                </div>
-            }
+          </div>
+        </div>
+      }
 
-            <style>{`
+        <Footer />
+      {/* <div className="grid o-container row">
+        <hr className="sketch-rule grid__item text-dark mt-4" />
+      </div> */}
+
+
+      <style>{`
             .grid {
                 max-width: 100%;
                 margin: 0 auto;
@@ -369,8 +378,8 @@ const ViewBlog = () => {
                   }
             
             `}</style>
-        </div>
-    )
+    </div>
+  )
 }
 
 export default ViewBlog

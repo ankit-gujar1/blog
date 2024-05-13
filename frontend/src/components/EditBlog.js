@@ -3,9 +3,12 @@ import { Navbar } from './Navbar'
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Footer from './Footer';
 
 const EditBlog = () => {
-    const url = "http://localhost:8080/";
+
+    const url = "https://blog-fotd.onrender.com/";
+    // const url = "http://localhost:8080/";
 
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
@@ -82,7 +85,7 @@ const EditBlog = () => {
                         </div>
 
                         <div className="row flex-lg-row-reverse">
-                          
+
                             {selectedImage && <div className="col-lg-6 col-12 card border border-0 mt-3">
                                 <div className="recent-square-container m-auto mb-3 bg-dark border border-0 shadow-lg mb-3">
                                     {/* 608x780 */}
@@ -99,7 +102,7 @@ const EditBlog = () => {
 
                             <div className='col-lg-6 col-12 m-auto'>
                                 <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
-                                <input name='image' className="form-control border border-3 py-3 shadow bg-body rounded" type="file" onChange={(e) => {setImage(e.target.files[0]);setselectedImage(e.target.files[0])}} id="formFile" accept='image/*' />
+                                <input name='image' className="form-control border border-3 py-3 shadow bg-body rounded" type="file" onChange={(e) => { setImage(e.target.files[0]); setselectedImage(e.target.files[0]) }} id="formFile" accept='image/*' />
                             </div>
                         </div>
 
@@ -109,6 +112,12 @@ const EditBlog = () => {
                     </form>
                 </div>
             </div>
+
+                <Footer />
+            {/* <div className="grid o-container row">
+                <hr className="sketch-rule grid__item text-dark mt-4" />
+            </div> */}
+
             <style>{`
             .grid {
                 max-width: 100%;

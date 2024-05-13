@@ -3,30 +3,31 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Navbar } from "./Navbar";
+import Footer from "./Footer";
 
-const Signup=()=>{
+const Signup = () => {
 
-    // const url="https://reminder-3jth.onrender.com/";
-    const url="http://localhost:8080/";
+    const url = "https://blog-fotd.onrender.com/";
+    // const url="http://localhost:8080/";
 
-    const [userName,setUserName]=useState();
-    const [password,setPassword]=useState();
+    const [userName, setUserName] = useState();
+    const [password, setPassword] = useState();
     const [dp, setDp] = useState();
 
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
-    const [error,setError]=useState(null);
+    const [error, setError] = useState(null);
 
-    const {user,dispatch}=useAuthContext();
+    const { user, dispatch } = useAuthContext();
 
-    useEffect(()=>{
-        if(user){
+    useEffect(() => {
+        if (user) {
             navigate('/');
             return;
         }
-    },[user])
+    }, [user])
 
-    function signupUser(e){
+    function signupUser(e) {
         e.preventDefault();
 
         const formData = new FormData();
@@ -34,18 +35,18 @@ const Signup=()=>{
         formData.append('password', password);
         formData.append('dp', dp);
 
-        axios.post(url+'signup',formData)
-        .then((r)=>{
-            localStorage.setItem('user',JSON.stringify(r.data));
-            dispatch({type:'LOGIN',payload:r.data});
-            navigate('/');
-        })
-        .catch((e)=>{
-            setError(e.response.data.error);
-        })
+        axios.post(url + 'signup', formData)
+            .then((r) => {
+                localStorage.setItem('user', JSON.stringify(r.data));
+                dispatch({ type: 'LOGIN', payload: r.data });
+                navigate('/');
+            })
+            .catch((e) => {
+                setError(e.response.data.error);
+            })
     }
 
-    return(
+    return (
         <div>
             <div className="grid o-container row">
                 <Navbar />
@@ -59,25 +60,25 @@ const Signup=()=>{
             <div className="row justify-content-center my-3 mx-2">
                 <div className="col-md-6">
                     <form onSubmit={signupUser} encType=" multipart/form-data">
-                    <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Username</label> */}
-                            <input type="text" className="form-control" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
+                            <input type="text" className="form-control shadow bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
                             <label className='text-dark' for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Password</label> */}
-                            <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
+                            <input type="password" className="form-control shadow bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
                             <label className='text-dark' for="floatingInput">Password</label>
                         </div>
 
                         <div className="mt-2">
                             <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Profile picture (crop image in 3:4 aspect ratio for beter results)</label>
-                            <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => setDp(e.target.files[0])} id="formFile" accept='image/*' />
+                            <input name='image' className="form-control border border-3 py-3 shadow bg-body rounded" type="file" onChange={(e) => setDp(e.target.files[0])} id="formFile" accept='image/*' />
                         </div>
 
                         <div className="text-center mt-3">
-                            <button type="submit" className='btn btn-dark rounded-pill fs-5 px-5 py-1'>Post</button>
+                            <button type="submit" className='btn btn-dark rounded-pill fs-5 px-5 py-1'>Signup</button>
                         </div>
 
                         <div className="text-center my-2">
@@ -89,6 +90,12 @@ const Signup=()=>{
                     </form>
                 </div>
             </div>
+
+                {/* <Footer /> */}
+            {/* <div className="grid o-container row">
+                <hr className="sketch-rule grid__item text-dark mt-4" />
+            </div> */}
+
             <style>{`
             .grid {
                 max-width: 100%;

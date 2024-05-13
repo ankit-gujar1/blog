@@ -3,11 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Navbar } from "./Navbar";
+import Footer from "./Footer";
 
 const Login = () => {
 
-    // const url="https://reminder-3jth.onrender.com/";
-    const url = "http://localhost:8080/";
+    const url = "https://blog-fotd.onrender.com/";
+    // const url = "http://localhost:8080/";
 
     const [userName, setUserName] = useState();
     const [password, setPassword] = useState();
@@ -53,20 +54,20 @@ const Login = () => {
             <div className="row justify-content-center my-3 mx-2">
                 <div className="col-md-6">
                     <form onSubmit={loginUser}>
-                    <div class="form-floating mb-3">
+                        <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Username</label> */}
-                            <input type="text" className="form-control shadow p-3 mb-2 bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
+                            <input type="text" className="form-control shadow bg-body rounded" onChange={(e) => setUserName(e.target.value)} placeholder="Enter Username" />
                             <label className='text-dark' for="floatingInput">Username</label>
                         </div>
 
                         <div class="form-floating mb-3">
                             {/* <label className="form-label">Enter Password</label> */}
-                            <input type="password" className="form-control shadow p-3 mb-2 bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
+                            <input type="password" className="form-control shadow bg-body rounded" onChange={(e) => setPassword(e.target.value)} placeholder="Enter Password" />
                             <label className='text-dark' for="floatingInput">Password</label>
                         </div>
 
                         <div className="text-center mt-3">
-                            <button type="submit" className='btn btn-dark rounded-pill fs-5 px-5 py-1'>Post</button>
+                            <button type="submit" className='btn btn-dark rounded-pill fs-5 px-5 py-1'>Login</button>
                         </div>
 
                         <div className="text-center my-2">
@@ -78,6 +79,12 @@ const Login = () => {
                     </form>
                 </div>
             </div>
+
+            {/* <div className="mt-5 pt-5">
+                <Footer />
+                <hr className="sketch-rule grid__item text-dark mt-4" />
+            </div> */}
+
             <style>{`
             .grid {
                 max-width: 100%;

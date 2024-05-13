@@ -4,11 +4,12 @@ import axios from "axios";
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Navbar } from "./Navbar";
+import Footer from "./Footer";
 
 const PopularBlogs = () => {
 
-
-  const url = "http://localhost:8080/";
+  const url="https://blog-fotd.onrender.com/";
+  // const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 
@@ -143,6 +144,12 @@ const PopularBlogs = () => {
       </div>
 
       {/* </div> */}
+
+        <Footer />
+      {/* <div className="grid o-container row">
+        <hr className="sketch-rule grid__item text-dark mt-4" />
+      </div> */}
+
       <style>{`
 
 .button {

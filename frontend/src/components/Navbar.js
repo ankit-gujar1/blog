@@ -32,11 +32,8 @@ export const Navbar = () => {
                             <li className="nav-item">
                                 <Link className="nav-link active fs-6" aria-current="page" to={'/my-blogs'}>My Blogs</Link>
                             </li>
-                            <li className="nav-item">
+                            <li className="nav-item pe-2">
                                 <Link className="nav-link active fs-6" aria-current="page" to={'/popular-blogs'}>Popular Blogs</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link active fs-6" aria-current="page" to={'/'}>Recent Blogs</Link>
                             </li>
                         </ul>
 
