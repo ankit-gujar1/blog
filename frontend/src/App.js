@@ -158,7 +158,7 @@ function App() {
                 </div>
               </div>
               <div className="card border border-0">
-                <Link to={'/post-blog'}>
+                <Link to={'/view-blog/'+i._id}>
                   <div className="square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
                     {/* 608x780 */}
                     <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={"http://localhost:8080/" + i.image} alt="Card image" />

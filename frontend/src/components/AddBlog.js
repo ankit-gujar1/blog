@@ -12,7 +12,7 @@ const AddBlog = () => {
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
     const [image, setImage] = useState();
-    const [selectedImage, setselectedImage] = useState(null);
+    const [selectedImage, setselectedImage] = useState();
 
     const navigate = useNavigate();
 
@@ -61,13 +61,13 @@ const AddBlog = () => {
                     {/* <h3 className="text-center my-3" style={{fontFamily:'Poetsen One'}}>Share your story</h3> */}
                     <form onSubmit={postBlog} encType=" multipart/form-data">
                         <div className="form-floating mb-3">
-                            <input type="text" className="form-control border border-3" onChange={(e) => setTitle(e.target.value)} placeholder="name@example.com" />
+                            <input type="text" className="form-control border border-3 shadow bg-body rounded" onChange={(e) => setTitle(e.target.value)} placeholder="name@example.com" />
                             <label className='text-dark' for="floatingInput">Blog Title</label>
                         </div>
 
 
                         <div className="form-floating">
-                            <textarea className="form-control border border-3" onChange={(e) => setBody(e.target.value)} placeholder="Leave a comment here" style={{ height: "250px" }}></textarea>
+                            <textarea className="form-control border border-3 shadow bg-body rounded" onChange={(e) => setBody(e.target.value)} placeholder="Leave a comment here" style={{ height: "250px" }}></textarea>
                             <label className='text-dark' for="floatingTextarea">Blog Description</label>
                         </div>
 
@@ -75,7 +75,7 @@ const AddBlog = () => {
                         {selectedImage &&
                             <div className="row flex-lg-row-reverse">
 
-                                <div className="col-lg-6 col-12 card border border-0 mt-2">
+                                <div className="col-lg-6 col-12 card border border-0 mt-3">
                                     <div className="recent-square-container m-auto mb-3 bg-dark border border-0 shadow-lg mb-3">
                                         {/* 608x780 */}
                                         <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={URL.createObjectURL(selectedImage)} alt="Card image" />
@@ -84,14 +84,14 @@ const AddBlog = () => {
 
                                 <div className='col-lg-6 col-12 m-auto'>
                                     <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
-                                    <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => { setImage(e.target.files[0]); setselectedImage(e.target.files[0]) }} id="formFile" accept='image/*' />
+                                    <input name='image' className="form-control border border-3 py-3 shadow bg-body rounded" type="file" onChange={(e) => { setImage(e.target.files[0]); setselectedImage(e.target.files[0]) }} id="formFile" accept='image/*' />
                                 </div>
 
                             </div>}
 
-                        {!selectedImage && <div className='m-auto mt-2'>
+                        {!selectedImage && <div className='m-auto mt-3'>
                             <label style={{ fontSize: "0.85rem" }} for="formFile" className="text-dark form-label mb-0 ms-1">Blog Image (crop image in 3:4 aspect ratio for beter results)</label>
-                            <input name='image' className="form-control border border-3 py-3" type="file" onChange={(e) => { setImage(e.target.files[0]); setselectedImage(e.target.files[0]) }} id="formFile" accept='image/*' />
+                            <input name='image' className="form-control border border-3 py-3 shadow bg-body rounded" type="file" onChange={(e) => { setselectedImage(e.target.files[0]); setImage(e.target.files[0]); }} id="formFile" accept='image/*' />
                         </div>}
 
 

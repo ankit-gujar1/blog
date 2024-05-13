@@ -17,7 +17,10 @@ const getAllBlogs = async (req, res) => {
 const getBlogByBlogId = async (req, res) => {
     const { id } = req.params;
     if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ error: "Blog not found" });
-    const b = await Blog.findById(id);
+    const b = await Blog.findById(id).populate({
+        path: 'postedBy',
+        select: '-password'
+    });
     if (!b) return res.status(404).json({ error: "Blog not found" });
     res.status(200).json(b);
 }
