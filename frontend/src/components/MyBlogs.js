@@ -97,7 +97,7 @@ const MyBlogs = () => {
         {blogs &&
           blogs.map((i) => (
 
-            <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-11 mb-3 m-auto">
+            <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
@@ -134,18 +134,18 @@ const MyBlogs = () => {
                   </div>
                 </div>
                 <div className="card-body p-0 ms-1 py-3">
-                  <Link to={'/view-blog/'+i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
+                  <Link to={'/view-blog/'+i._id} className="text-dark" style={{ textDecoration: 'none' }}><h6 className="card-title">{i.title}<b> - Read Now</b></h6></Link>
 
                   <div className="row">
                     <div className="col-6">
-                      <Link to={'/edit-blog/' + i._id} className="edit-button m-auto">
+                      <Link to={'/edit-blog/' + i._id} className="edit-button ms-auto">
                         <svg className="edit-svgIcon" viewBox="0 0 512 512">
                           <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
                         </svg>
                       </Link>
                     </div>
                     <div className="col-6">
-                      <button className="delete-button m-auto" onClick={() => deleteBlog(i._id)}>
+                      <button className="delete-button" onClick={() => deleteBlog(i._id)}>
                         <svg className="delete-svgIcon" viewBox="0 0 448 512">
                           <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path>
                         </svg>
@@ -176,6 +176,31 @@ const MyBlogs = () => {
       </div> */}
 
       <style>{`
+
+.Link:focus,
+.Link:hover {
+  color: #fff;
+}
+
+.Link:focus:after,
+.Link:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.Link:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #000;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
 
 .delete-button {
   width: 40px;
@@ -409,7 +434,7 @@ hr {
 
   .recent-square-container {
     width: 100%; /* adjust as needed */
-    height: 27rem !important; /* adjust as needed */
+    // height: 29.6rem !important; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -422,7 +447,7 @@ hr {
 
   .square-container {
     width: 100%; /* adjust as needed */
-    height: 21.7rem !important; /* adjust as needed */
+    // height: 21.7rem !important; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -435,7 +460,7 @@ hr {
 
 .recent-square-container {
     width: 100%; /* adjust as needed */
-    height: 28rem; /* adjust as needed */
+    // height: 28rem; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -448,7 +473,7 @@ hr {
 
 .square-container {
     width: 100%; /* adjust as needed */
-    height: 28rem; /* adjust as needed */
+    // height: 28rem; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;

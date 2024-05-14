@@ -82,7 +82,7 @@ const ViewBlog = () => {
             </button>
           </div>
 
-          <div className="col-6 m-auto">
+          <div className="col-6 m-auto ps-0 d-flex justify-content-start">
             <div id="btn-message" className="button-message">
               <div className="content-avatar">
                 <div className="avatar">

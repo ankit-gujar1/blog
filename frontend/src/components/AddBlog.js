@@ -166,7 +166,7 @@ const AddBlog = () => {
 
               .recent-square-container {
                 width: 100%; /* adjust as needed */
-                height: 31rem !important; /* adjust as needed */
+                // height: 31rem !important; /* adjust as needed */
                 display: flex;
                 justify-content: center;
                 align-items: center;
@@ -180,7 +180,7 @@ const AddBlog = () => {
 
             .recent-square-container {
                 width: 100%; /* adjust as needed */
-                height: 29.6rem; /* adjust as needed */
+                // height: 29.6rem; /* adjust as needed */
                 display: flex;
                 justify-content: center;
                 align-items: center;

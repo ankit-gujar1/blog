@@ -184,7 +184,7 @@ function App() {
                   </div>
                 </div>
                 <div className="card-body p-0 ms-1 pt-2">
-                  <Link to={'/view-blog/' + i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
+                  <Link to={'/view-blog/' + i._id} className="text-dark Link" style={{ textDecoration: 'none' }}><h6 className="card-title">{i.title}<b> - Read Now</b></h6></Link>
 
 
                   {/* <p>{i.body.split('\n').map((j) => (
@@ -212,7 +212,7 @@ function App() {
         {blogs &&
           blogs.map((i) => (
 
-            <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-11 mb-3 m-auto">
+            <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
@@ -224,7 +224,7 @@ function App() {
                 </div>
               </div>
               <div className="card border border-0">
-                <Link to={'/post-blog'}>
+                <Link to={'/view-blog/' + i._id}>
                   <div className="recent-square-container mb-3 bg-dark border border-0 shadow-lg mb-3">
                     {/* 608x780 */}
                     <img className="card-img-top align-self-center" style={{ width: '100%', height: '100%', objectFit: 'contain' }} src={url + i.image} alt="Card image" />
@@ -249,7 +249,7 @@ function App() {
                   </div>
                 </div>
                 <div className="card-body p-0 ms-1 pt-2">
-                  <Link to={'/view-blog/' + i._id} className="text-dark" style={{ textDecoration: 'none' }}><h5 className="card-title">{i.title}</h5></Link>
+                  <Link to={'/view-blog/' + i._id} className="text-dark Link" style={{ textDecoration: 'none' }}><h6 className="card-title">{i.title}<b> - Read Now</b></h6></Link>
 
 
                   {/* <p>{i.body.split('\n').map((j) => (
@@ -274,6 +274,33 @@ function App() {
       </div> */}
       {/* </div> */}
       <style>{`
+
+
+
+.Link:focus,
+.Link:hover {
+  color: #fff;
+}
+
+.Link:focus:after,
+.Link:hover:after {
+  width: 100%;
+  left: 0%;
+}
+
+.Link:after {
+  content: "";
+  pointer-events: none;
+  bottom: -2px;
+  left: 50%;
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  background-color: #000;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition-duration: 400ms;
+  transition-property: width, left;
+}
 
 .button {
   padding: 15px 20px;
@@ -379,7 +406,7 @@ hr {
 
   .recent-square-container {
     width: 100%; /* adjust as needed */
-    height: 27rem !important; /* adjust as needed */
+    // height: 29.6rem !important; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -392,7 +419,7 @@ hr {
 
   .square-container {
     width: 100%; /* adjust as needed */
-    height: 21.7rem !important; /* adjust as needed */
+    // height: 21.7rem !important; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -414,7 +441,7 @@ hr {
 
 .recent-square-container {
     width: 100%; /* adjust as needed */
-    height: 28rem; /* adjust as needed */
+    // height: 28rem; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -427,7 +454,7 @@ hr {
 
 .square-container {
     width: 100%; /* adjust as needed */
-    height: 28rem; /* adjust as needed */
+    // height: 28rem; /* adjust as needed */
     display: flex;
     justify-content: center;
     align-items: center;
