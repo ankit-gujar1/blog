@@ -8,8 +8,8 @@ import Footer from "./Footer";
 
 const ViewBlog = () => {
 
-  const url = "https://blog-fotd.onrender.com/";
-  // const url = "http://localhost:8080/";
+  // const url = "https://blog-fotd.onrender.com/";
+  const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 
@@ -86,11 +86,11 @@ const ViewBlog = () => {
             <div id="btn-message" className="button-message">
               <div className="content-avatar">
                 <div className="avatar">
-                  <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + blog.postedBy.dp}></img></Link>
+                <Link to={'/all-blogs/'+blog.postedBy._id} style={{ textDecoration: 'none' }} className="text-dark"><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + blog.postedBy.dp}></img></Link>
                 </div>
               </div>
               <div className="notice-content">
-                <div className="user-id fs-6 m-auto">@{blog.postedBy.userName}</div>
+              <Link to={'/all-blogs/'+blog.postedBy._id} style={{ textDecoration: 'none' }} className="text-dark"><div className="user-id fs-6 m-auto">@{blog.postedBy.userName}</div></Link>
               </div>
             </div>
 

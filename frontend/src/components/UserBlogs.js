@@ -1,25 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import { useAuthContext } from "../hooks/useAuthContext";
 import { Navbar } from "./Navbar";
 import Footer from "./Footer";
 
-const PopularBlogs = () => {
-
+const UserBlogs = () => {
   // const url="https://blog-fotd.onrender.com/";
   const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 
-  const [popularBlogs, setpopularBlogs] = useState();
+  const [userBlogs, setUserBlogs] = useState();
   // const [display, setDisplay] = useState('block');
 
   const [likes, setLikes] = useState(0);
   const [disableLikeBtn, setDisableLikeBtn] = useState(false);
 
   const { user } = useAuthContext();
+
+  const { id } = useParams();
 
   useEffect(() => {
     // const u=JSON.parse(localStorage.getItem('user'));
@@ -35,9 +36,9 @@ const PopularBlogs = () => {
       return;
     }
 
-    axios.get(url + "popular-blogs", { headers: { Authorization: "Bearer " + user.token } })
+    axios.get(url + "all-blogs/" + id, { headers: { Authorization: "Bearer " + user.token } })
       .then((r) => {
-        setpopularBlogs(r.data);
+        setUserBlogs(r.data);
       })
       .catch((e) => {
         console.log(e);
@@ -76,7 +77,7 @@ const PopularBlogs = () => {
       <div className="grid o-container row">
         <Navbar />
         <hr className="sketch-rule grid__item text-dark mt-4" />
-        <div className="col-6"><h1 className="mb-4 ps-2" style={{ fontFamily: 'Poetsen One' }}>Our most popular blogs</h1></div>
+        {userBlogs &&<div className="col-6"><h1 className="mb-4 ps-2" style={{ fontFamily: 'Poetsen One' }}>Blogs from @{userBlogs[0].postedBy.userName}</h1></div>}
         <div className="col-6 d-flex justify-content-end h-25">
           <Link to={'/post-blog'} className="button" style={{ textDecoration: 'none' }}>Post<span className="button-span"> your story</span></Link>
 
@@ -84,18 +85,18 @@ const PopularBlogs = () => {
       </div>
 
       <div className="row m-0 o-container">
-        {popularBlogs &&
-          popularBlogs.map((i) => (
+        {userBlogs &&
+          userBlogs.map((i) => (
 
             <div key={i._id} className="col-lg-3 col-md-6 col-sm-6 col-12 mb-3">
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
-                    <Link to={'/all-blogs/'+i.postedBy._id} style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img></Link>
+                    <img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img>
                   </div>
                 </div>
                 <div className="notice-content">
-                <Link to={'/all-blogs/'+i.postedBy._id} style={{ textDecoration: 'none' }} className="text-dark"><div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div></Link>
+                  <div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div>
                 </div>
               </div>
               <div className="card border border-0">
@@ -547,4 +548,4 @@ hr {
   )
 }
 
-export default PopularBlogs
+export default UserBlogs

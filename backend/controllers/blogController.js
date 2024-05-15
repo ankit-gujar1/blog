@@ -25,6 +25,17 @@ const getBlogByBlogId = async (req, res) => {
     res.status(200).json(b);
 }
 
+const getBlogByUserId = async (req, res) => {
+    const { id } = req.params;
+    if (!mongoose.Types.ObjectId.isValid(id)) return res.status(404).json({ error: "Blog not found" });
+    const b = await Blog.find({postedBy:id}).populate({
+        path: 'postedBy',
+        select: '-password'
+    }).sort({ createdAt: -1 });;
+    if (!b) return res.status(404).json({ error: "Blog not found" });
+    res.status(200).json(b);
+}
+
 const get8Blogs = async (req, res) => {
     try {
         const b = await Blog.find({}).populate({
@@ -134,4 +145,4 @@ const dislikeBlog = async (req, res) => {
     }
 }
 
-module.exports = { getAllBlogs, getAllBlogsByUserId, get8PopularBlogs, getAllPopularBlogs, postBlog, deleteBlog, updateBlog, likeBlog, dislikeBlog, get8Blogs, getBlogByBlogId };
+module.exports = { getAllBlogs, getAllBlogsByUserId, get8PopularBlogs, getAllPopularBlogs, postBlog, deleteBlog, updateBlog, likeBlog, dislikeBlog, get8Blogs, getBlogByBlogId, getBlogByUserId };

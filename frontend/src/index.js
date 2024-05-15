@@ -12,6 +12,7 @@ import MyBlogs from './components/MyBlogs';
 import PopularBlogs from './components/PopularBlogs';
 import EditBlog from './components/EditBlog';
 import ViewBlog from './components/ViewBlog';
+import UserBlogs from './components/UserBlogs';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -25,6 +26,7 @@ const router=createBrowserRouter([
   {path:'/popular-blogs',element:<PopularBlogs/>},
   {path:'/edit-blog/:id',element:<EditBlog/>},
   {path:'/view-blog/:id',element:<ViewBlog/>},
+  {path:'/all-blogs/:id',element:<UserBlogs/>},
 
   //admin
   {path:'/admin/home',element:<Home/>}

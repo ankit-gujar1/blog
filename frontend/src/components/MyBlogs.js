@@ -8,8 +8,8 @@ import Footer from "./Footer";
 
 const MyBlogs = () => {
 
-  const url="https://blog-fotd.onrender.com/";
-  // const url = "http://localhost:8080/";
+  // const url="https://blog-fotd.onrender.com/";
+  const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 

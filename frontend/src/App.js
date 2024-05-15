@@ -7,8 +7,8 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow"
 import Footer from "./components/Footer";
 
 function App() {
-  const url = "https://blog-fotd.onrender.com/";
-  // const url = "http://localhost:8080/";
+  // const url = "https://blog-fotd.onrender.com/";
+  const url = "http://localhost:8080/";
 
   const navigate = useNavigate();
 
@@ -114,7 +114,7 @@ function App() {
             </p>
           </div>
           <div className="col-lg-6 col-sm-12 ms-auto custom-mobile-style">
-            <div className="search mx-2">
+            <div className="search">
               <input
                 className="px-4 py-3 rounded-pill"
                 placeholder="Enter email"
@@ -151,11 +151,11 @@ function App() {
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
-                    <Link style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img></Link>
+                    <Link to={'/all-blogs/'+i.postedBy._id} style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img></Link>
                   </div>
                 </div>
                 <div className="notice-content">
-                  <div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div>
+                <Link to={'/all-blogs/'+i.postedBy._id} style={{ textDecoration: 'none' }} className="text-dark"><div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div></Link>
                 </div>
               </div>
               <div className="card border border-0">
@@ -216,11 +216,11 @@ function App() {
               <div id="btn-message" className="button-message">
                 <div className="content-avatar">
                   <div className="avatar">
-                    <img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img>
+                    <Link to={'/all-blogs/'+i.postedBy._id} style={{ textDecoration: 'none' }}><img className="user-img bg-dark" style={{ width: '40px', objectFit: 'contain' }} src={url + i.postedBy.dp}></img></Link>
                   </div>
                 </div>
                 <div className="notice-content">
-                  <div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div>
+                <Link to={'/all-blogs/'+i.postedBy._id} style={{ textDecoration: 'none' }} className="text-dark"><div className="user-id fs-6 m-auto">@{i.postedBy.userName}</div></Link>
                 </div>
               </div>
               <div className="card border border-0">

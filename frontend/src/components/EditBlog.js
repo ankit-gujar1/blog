@@ -7,8 +7,8 @@ import Footer from './Footer';
 
 const EditBlog = () => {
 
-    const url = "https://blog-fotd.onrender.com/";
-    // const url = "http://localhost:8080/";
+    // const url = "https://blog-fotd.onrender.com/";
+    const url = "http://localhost:8080/";
 
     const [title, setTitle] = useState();
     const [body, setBody] = useState();
